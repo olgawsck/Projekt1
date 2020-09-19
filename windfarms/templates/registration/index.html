@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WINDFARMS APP</title>
+</head>
+
+<body>
+
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}! <a href="{% url 'logout' %}">Log Out</a>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
+
+
+<p></p>
+<h1>GENERAL VIEW</h1>
+<h2>COMPANIES</h2>
+    {% if company_list %}
+        <ul>
+        {% for company in company_list %}
+            <li><a href="{% url 'company_inspect' company.id %}">{{ company.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No companies are available.</p>
+    {% endif %}
+
+
+{% if user.is_authenticated %}
+{% else %}
+<p>ZALOGUJ SIĘ, ABY UZYSKAĆ DOSTĘP DO DANYCH PONIŻEJ!</p>
+{% endif %}
+
+<h2>WINDFARMS</h2>
+    {% if windfarm_list %}
+        <ul>
+        {% for windfarm in windfarm_list %}
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'windfarm_inspect' windfarm.id %}">{{ windfarm.name }}</a></li>
+            {% else %}
+                <li><a>{{ windfarm.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No windfarms are available.</p>
+    {% endif %}
+
+<h2>TURBINES</h2>
+    {% if powerplant_list %}
+        <ul>
+        {% for pp in powerplant_list %}
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'turbine_inspect' pp.id %}">{{ pp.name }}</a></li>
+            {% else %}
+                <li><a>{{ pp.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No windmill power plants are available.</p>
+    {% endif %}
+
+
+<footer>
+    <strong>
+        Dzisiaj jest {{ now }}
+    </strong>
+</footer>
+
+</body>
+</html>

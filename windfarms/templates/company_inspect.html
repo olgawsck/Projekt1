@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'index' %}">Back to general view</a>
+<p></p>
+<h1>Inspecting {{ company.name }}</h1>
+<h2>Description:</h2>
+<p>{{ company.description }}</p>
+
+<h2>Company windfarms</h2>
+    {% if windfarm_list %}
+        <ul>
+        {% for windfarm in windfarm_list %}
+            <li><a href="{% url 'windfarm_inspect' windfarm.id %}">{{ windfarm.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No windfarms are available for this company.</p>
+    {% endif %}
+
+<h1></h1>
+<footer>
+    <strong>
+        Dzisiaj jest {{ now }}
+    </strong>
+</footer>
+
+</body>
+</html>

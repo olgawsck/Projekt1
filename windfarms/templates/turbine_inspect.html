@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<a href="{% url 'index' %}">Back to general view</a>
+<p></p>
+<h1>Inspecting {{ turbine.name }}</h1>
+<h2>Turbine owner:</h2>
+<a href="{% url 'company_inspect' windfarm_owner.id %}">{{ windfarm_owner.name }}</a>
+
+<h2>Turbine farm:</h2>
+<a href="{% url 'windfarm_inspect' turbineParentFarm.id %}">{{ turbineParentFarm.name }}</a>
+
+<h2>Turbine data</h2>
+<p>
+    <b>Description:</b> {{ turbine.description }}
+</p>
+<p>
+    <b>Engine:</b> {{ turbine.engine }}
+</p>
+<p>
+    <b>Output:</b> {{ turbine.output }}
+</p>
+
+<footer>
+    <strong>
+        Dzisiaj jest {{ now }}
+    </strong>
+</footer>
+
+</body>
+</html>
